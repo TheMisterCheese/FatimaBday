@@ -80,10 +80,13 @@ body{
 .locked-memories{
     display: flex;
     flex-direction: column;
-    column-gap: 80px;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
 }
 .memories{
-    width: 200px;
+    width: 400px;
     height: auto;
+    
     
 }
