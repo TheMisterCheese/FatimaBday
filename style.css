@@ -70,7 +70,7 @@ body{
     bottom: 50px;
 }
 
-.scroll-triangle{
+#scroll-triangle{
     width: 60px;
     height: auto;
     rotate: 180deg;
@@ -92,11 +92,71 @@ body{
 }
 .locked-memories{
     display: flex;
-    flex-direction: column;
-    justify-content: left;
-    
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
     gap: 100px;
+    flex: 0 0 5em;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    anchor-name: --memoryc;
+    scroll-snap-type: x mandatory;
+    scroll-marker-group: after;
+    margin-bottom: 50px;
 }
+.locked-memories::scroll-marker-group{
+    display: flex;
+    justify-content: center;
+    gap: .5em;
+    margin-bottom: 50px;
+
+}
+.memory-card::scroll-marker{
+    content: '';
+    height: 1em;
+    width: 1em;
+    background-color: rgb(42, 42, 42);
+    border-radius: 50%;
+}
+.memory-card::scroll-marker:target-current{
+    background-color: rgb(216, 218, 218);
+    translate: translateY(-8px);
+}
+.locked-memories::-webkit-scrollbar{
+    display: none;
+}
+.locked-memories::scroll-button(right), .locked-memories::scroll-button(left){
+    content: '>>';
+    border: none;
+    background-color: rgb(216, 218, 218);
+    font-family: Montserrat;
+    font-size: 40px;
+    color: #00000069;
+    border-radius: 30px;
+    height: 60px;
+    width: 60px;
+    padding-bottom: 4px;
+    cursor: pointer;
+    font-weight: light;
+    box-shadow: 2px 2px 25px #00000069;
+    position: fixed;
+    position-anchor: --memoryc;
+    position-area: right center;
+    translate: -50%;
+    scroll-snap-type: x mandatory;
+    
+}
+.locked-memories::scroll-button(left){
+    content: '<<';
+    position-area: left center;
+    translate: 50%;
+}
+.locked-memories::scroll-button(right):disabled, .locked-memories::scroll-button(left):disabled{
+    opacity: 0.5;
+    cursor: auto;
+}
+
+
 .memories{
     width: 400px;
     height: auto;
@@ -112,14 +172,22 @@ body{
     flex-direction: column;
     color: rgb(216, 218, 218);
     border-radius: 15px;
-    box-shadow: 2px 2px 25px #f8090969;
+    box-shadow: 2px 2px 25px var(--shadow-color, #f8090969);
     width: 350px;
     margin: 0 auto;
     bottom: 20px;
     height: 190px;
+    transition: box-shadow 0.4s ease;
+    transform: translateY(0) translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.password-protection:hover{
+  transform: translateY(-8px) translateZ(0);
 }
 #password-submit{
-    background-color: rgb(255, 80, 80);
+    background-color: var(--shadow-color, #f8090969);
     border-radius: 30px;
     font-size: 20px;
     border: none;
@@ -128,8 +196,10 @@ body{
     font-weight: bold;
     width: 290px;
     height: 50px;
-    box-shadow: 2px 2px 25px #f8090969;
+    box-shadow: 2px 2px 25px var(--shadow-color, #f8090969);
+    transition: box-shadow 0.4s ease;
 }
+
 #lock{
     border-radius: 10px;
     width: 290px;
@@ -140,7 +210,8 @@ body{
     font-size: 30px;
     border: none;
     font-weight: bold;
-    box-shadow: 2px 2px 25px #f8090969;
+    box-shadow: 2px 2px 25px var(--shadow-color, #f8090969);
+    transition: box-shadow 0.4s ease;
 }
 
 .password-memory{
@@ -153,6 +224,7 @@ body{
 }
 .memory-card{
     display: flex;
+    box-shadow: 2px 2px 25px #00000069;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -167,6 +239,19 @@ body{
     padding: 20px;
     margin-left: 80px;
     margin-top: 70px;
+    transition: box-shadow 0.9s ease;
+    transform: translateY(0) translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+    scroll-snap-align: start;
+}
+.memory-card:hover{
+    box-shadow: 2px 2px 25px rgb(216, 218, 218);
+    transform: translateY(-8px) translateZ(0);
+}
+.memory:hover{
+    box-shadow: 2px 2px 25px rgb(216, 218, 218);
 }
 .carousel-group{
     display: flex;
@@ -202,4 +287,22 @@ body{
 @keyframes spin{
     from {translate: 0;}
     to {translate: -100%}
+}
+html{
+    scroll-behavior: inherit;
+}
+.timeline{
+    display: flex;
+    flex: 1;
+}
+footer{
+    color: rgb(216, 218, 218);
+    font-family: Montserrat;
+    background-color: rgb(42, 42, 42);
+    height: 50px;
+    top: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
 }

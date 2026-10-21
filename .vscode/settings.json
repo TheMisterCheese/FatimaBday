@@ -4,5 +4,8 @@
         "userpassword",
         "userpasword",
         "wght"
+    ],
+    "cSpell.ignoreWords": [
+        "memoryc"
     ]
 }
