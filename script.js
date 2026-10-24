@@ -35,3 +35,5 @@ triangleEl.addEventListener('click', function(){
     });
 
 });
+const randomDegrees = Math.floor(Math.random() * (max - min + 1)) + min
+document.documentElement.style.setProperty('--randomrotate', '${randomDegrees}deg');
